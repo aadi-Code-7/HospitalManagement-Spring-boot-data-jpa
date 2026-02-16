@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -51,17 +52,28 @@ public class patient {
     @Enumerated(EnumType.STRING)
     private BloodGroup bloodGroup;
 
-    @OneToOne //patient to insurance -> one-to-one relation
+    //patient to insurance -> one-to-one relation
+    @OneToOne (cascade = {CascadeType.ALL}, orphanRemoval = true) //Cascade functions for updating child(insurance) when parent(patient) is updated or save.
     @JoinColumn(name = "patientInsurance_ID") //Owning Side //Have FK patientInsurance_ID
     private Insurance insurance;
 
-    @OneToMany(mappedBy = "patient") //Inverse side //don't have any attribute like patientAppointment_ID
-    private List<Appointment> appointment;
+    //Inverse side //don't have any attribute like patientAppointment_ID
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Appointment> appointment = new ArrayList<>();
+
+
     /*
     Key Points:
         ->The owning side dictates the foreign key updates
         ->Updates on the mapped field on the inverse side cannot update the foreign key.
         ->Parent control lifecycle of others, here if a patient is deleted, their appointment should also be deleted.
           Hence, patient is a parent.
+     */
+    /*
+    If Cascade is CascadeType.PERSIST or ALL, you have added Appointment object to patient.getAppointments() and
+    set appointment.setPatient(patient) then,
+        ->Saving the patient automatically saves the appointment
+        ->Deleting the patient automatically deletes all the appointment(because of REMOVE and orphanRemoval = true )
+        ->No need to explicitly save or delete appointment.
      */
 }

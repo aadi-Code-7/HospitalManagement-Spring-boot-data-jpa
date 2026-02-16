@@ -3,7 +3,9 @@ package HospitalManagement.example.HospitalManagement.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,7 +14,6 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Doctor {
 
     @Id
@@ -30,4 +31,7 @@ public class Doctor {
 
     @ManyToMany (mappedBy = "doctors")
     private Set<Department> departments = new HashSet<>(); //Inverse Side -> bidirectional mapping
+
+    @OneToMany(mappedBy = "doctor")
+    private List<Appointment> appointments = new ArrayList<>();
 }
