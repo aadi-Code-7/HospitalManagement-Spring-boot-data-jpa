@@ -1,0 +1,16 @@
+package HospitalManagement.example.HospitalManagement.DTO;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class DoctorResponseDto {
+    private Long id;
+    private String name;
+    private String specialization;
+    private String email;
+}

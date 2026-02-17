@@ -9,6 +9,9 @@ INSERT INTO doctor(name, specialization, email)
 VALUES
     ('Dr. Ram Lal Golcha', 'Opthomology', 'ram202@gmail.com'),
     ('Dr. Sweta Tapariya', 'Cardiology', 'sweta122@gmail.com'),
+    ('Dr. Rakesh Mehta', 'Cardiology', 'rakesh.mehta@example.com'),
+    ('Dr. Sneha Kapoor', 'Dermatology', 'sneha.kapoor@example.com'),
+    ('Dr. Arjun Nair', 'Orthopedics', 'arjun.nair@example.com'),
     ('Dr. Harish Chandra', 'Dermatology', 'harsh544@gmail.com');
 
 INSERT INTO appointment(appointment_time, doctor_id, reason, patient_id)

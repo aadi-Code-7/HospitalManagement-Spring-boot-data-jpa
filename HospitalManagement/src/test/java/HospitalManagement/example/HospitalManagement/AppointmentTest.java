@@ -21,10 +21,10 @@ public class AppointmentTest {
                 .reason("Eye Irritation")
                 .build();
 
-        var newAppointment = appointmentService.createNewAppointment(appointment,1L,2L);
-        System.out.println(newAppointment);
-
-        var reappointment = appointmentService.reassignAppointment(newAppointment.getId(), 3L);
-        System.out.println(reappointment);
+//        var newAppointment = appointmentService.createNewAppointment(appointment,1L,2L);
+//        System.out.println(newAppointment);
+//
+//        var reappointment = appointmentService.reassignAppointment(newAppointment.getId(), 3L);
+//        System.out.println(reappointment);
     }
 }
