@@ -1,6 +1,7 @@
 package HospitalManagement.example.HospitalManagement.Security;
 
 import HospitalManagement.example.HospitalManagement.Entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,5 +29,14 @@ public class AuthUtil {
                 .signWith(getSecretKey())
                 .claim("userId", user.getId().toString())
                 .compact();
+    }
+
+    public String getUsernameFromToken(String token) {
+        Claims claims = Jwts.parser()
+                .verifyWith(getSecretKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+        return claims.getSubject();
     }
 }
